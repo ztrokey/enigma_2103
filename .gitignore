@@ -1,5 +1,4 @@
 #coverage file
-coverage/.resultset.json
-coverage/index.html
+coverage/*
 #DS Store!!!
 .DS_Store
