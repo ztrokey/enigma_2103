@@ -59,6 +59,16 @@ class Enigma
       @characters.index(letter)
     end
   end
+
+  def message_open
+    file = File.open('message.txt', "r")
+    require 'pry'; binding.pry
+  end
+
+  def message_read
+    message_open
+    file.read
+  end
 end
 
 # [6] pry(#<Enigma>)> characters.index('h') + a_shift_assigner

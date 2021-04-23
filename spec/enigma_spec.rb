@@ -69,8 +69,20 @@ RSpec.describe Enigma do
     end
   end
 
+  describe '#message_read' do
+    it 'opens and reads a file' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+      enigma.message_open
+
+      expect(enigma.message_read).to eq('hello world')
+    end
+  end
+
   describe '#tester' do
-    it 'this is just for me to test stuff' do
+    xit 'this is just for me to test stuff' do
       enigma = Enigma.new('hello world')
       enigma.generate_key
       enigma.offset_generator
