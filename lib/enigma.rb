@@ -62,12 +62,12 @@ class Enigma
 
   def message_open
     file = File.open('message.txt', "r")
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
   end
 
   def message_read
-    message_open
-    file.read
+    message_open.read
+    # file.read
   end
 end
 
