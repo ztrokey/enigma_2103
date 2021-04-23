@@ -70,7 +70,7 @@ RSpec.describe Enigma do
   end
 
   describe '#tester' do
-    xit 'this is just for me to test stuff' do
+    it 'this is just for me to test stuff' do
       enigma = Enigma.new('hello world')
       enigma.generate_key
       enigma.offset_generator

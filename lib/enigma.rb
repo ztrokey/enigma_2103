@@ -20,7 +20,7 @@ class Enigma
 
   def generate_key
     key = '02715'
-    # key = '%05d' % rand(5 ** 5) this does the random
+    # key = '%05d' % rand(5 ** 5) this does the random with leading 0's
     key.chars.map(&:to_i)
   end
 
@@ -57,7 +57,7 @@ class Enigma
   def message_index
     message_spliter.map do |letter|
       @characters.index(letter)
-    end 
+    end
   end
 end
 
@@ -70,3 +70,11 @@ end
 # => 7
 # [11] pry(#<Enigma>)> characters.index(message_spliter[0]) + a_shift_assigner
 # => 10
+
+# assign char.index(mess_split[index] + shift to variable
+# [2] pry(#<Enigma>)> x = characters.index(message_spliter[0]) + a_shift_assigner
+# => 10
+# then plug variable into characters index
+# [3] pry(#<Enigma>)> characters[x]
+# => "k"
+# then repeat for b, c, and d shifts
