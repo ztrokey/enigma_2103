@@ -24,7 +24,7 @@ RSpec.describe Enigma do
 
 
       expect(enigma.generate_key).to eq([0, 2, 7, 1, 5])
-      # expect(enigma.key_generator).to eq('')
+      # need to use mocks and stubs!!!
     end
   end
 
@@ -32,8 +32,8 @@ RSpec.describe Enigma do
     it 'generates a number based off of date' do
       enigma = Enigma.new('hello world')
 
-      expect(enigma.offset_generator).to eq(["1", "0", "2", "5"])
-      # expect(enigma.offset_generator('040895')).to eq(["1", "0", "2", "5"])
+      expected = ["1", "0", "2", "5"]
+      expect(enigma.offset_generator).to eq(expected)
     end
   end
 
@@ -81,17 +81,6 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#tester' do
-    xit 'this is just for me to test stuff' do
-      enigma = Enigma.new('hello world')
-      enigma.generate_key
-      enigma.offset_generator
-      enigma.message_spliter
-
-      expect(enigma.tester).to eq('nothing')
-    end
-  end
-
   describe '#split_array' do
     it 'creates sub arrays' do
       enigma = Enigma.new('hello world')
@@ -99,18 +88,20 @@ RSpec.describe Enigma do
       enigma.offset_generator
       enigma.message_spliter
 
-      expect(enigma.split_array).to eq([[7, 4, 11, 11], [14, 26, 22, 14], [17, 11, 3]])
+      expected = [[7, 4, 11, 11], [14, 26, 22, 14], [17, 11, 3]]
+      expect(enigma.split_array).to eq(expected)
     end
   end
 
-  describe '#encrypt_test' do
+  describe '#encrypted_indexes' do
     it 'tests encryption' do
       enigma = Enigma.new('hello world')
       enigma.generate_key
       enigma.offset_generator
       enigma.message_spliter
 
-      expect(enigma.encrypt_test).to eq([10, 31, 84, 31, 17, 53, 95, 34, 20, 38, 76])
+      expected = [10, 31, 84, 31, 17, 53, 95, 34, 20, 38, 76]
+      expect(enigma.encrypted_indexes).to eq(expected)
     end
   end
 
@@ -120,9 +111,59 @@ RSpec.describe Enigma do
       enigma.generate_key
       enigma.offset_generator
       enigma.message_spliter
-      enigma.encrypt_test
+      enigma.encrypted_indexes
 
       expect(enigma.encryptor).to eq("keder ohulw")
+    end
+  end
+
+  describe '#decrypt_split_array' do
+    it 'splits encrypted indexes into sub arrays' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+      enigma.encrypted_indexes
+
+      expected = [[10, 31, 84, 31], [17, 53, 95, 34], [20, 38, 76]]
+      expect(enigma.decrypt_split_array).to eq(expected)
+    end
+  end
+
+  describe '#decrypted_indexes' do
+    it 'decrypts indexes to oringal' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+      enigma.encrypted_indexes
+
+      expected = [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3]
+      expect(enigma.decrypted_indexes).to eq(expected)
+    end
+  end
+
+  describe '#decryptor' do
+    it 'decrypts indexes to string' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+      enigma.encrypted_indexes
+
+
+      expect(enigma.decryptor).to eq('hello world')
+    end
+  end
+
+  describe '#tester' do
+    xit 'this is just for me to test stuff' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+
+      expect(enigma.tester).to eq('nothing')
     end
   end
 end
