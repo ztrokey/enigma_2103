@@ -11,29 +11,12 @@ RSpec.describe Enigma do
       expect(enigma).to be_a Enigma
     end
 
-    it 'has attributes' do
+    xit 'has attributes' do
       enigma = Enigma.new('hello world')
 
       expect(enigma.message).to eq('hello world')
-    end
-  end
-
-  describe '#generate_key' do
-    it 'generates a random 5 digit number' do
-      enigma = Enigma.new('hello world')
-
-
-      expect(enigma.generate_key).to eq([0, 2, 7, 1, 5])
-      # need to use mocks and stubs!!!
-    end
-  end
-
-  describe '#offset_generator' do
-    it 'generates a number based off of date' do
-      enigma = Enigma.new('hello world')
-
-      expected = ["1", "0", "2", "5"]
-      expect(enigma.offset_generator).to eq(expected)
+      expect(enigma.key).to eq('02715')
+      expect(enigma.date).to eq('040895')
     end
   end
 
@@ -69,17 +52,17 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#message_read' do
-    it 'opens and reads a file' do
-      enigma = Enigma.new('hello world')
-      enigma.generate_key
-      enigma.offset_generator
-      enigma.message_spliter
-      enigma.message_open
+  # describe '#message_read' do
+  #   it 'opens and reads a file' do
+  #     enigma = Enigma.new('hello world')
+  #     enigma.generate_key
+  #     enigma.offset_generator
+  #     enigma.message_spliter
+  #     enigma.message_open
 
-      expect(enigma.message_read).to eq('hello world')
-    end
-  end
+  #     expect(enigma.message_read).to eq('hello world')
+  #   end
+  # end
 
   describe '#split_array' do
     it 'creates sub arrays' do
@@ -153,6 +136,19 @@ RSpec.describe Enigma do
 
 
       expect(enigma.decryptor).to eq('hello world')
+    end
+  end
+
+  describe '#encrypt' do
+    xit 'shows the message, key and date' do
+      enigma = Enigma.new('hello world')
+      # enigma.generate_key
+      # enigma.offset_generator
+      # enigma.message_spliter
+      # enigma.encrypted_indexes
+
+
+      expect(enigma.encrypt(@message, @key, @date)).to eq('hello world')
     end
   end
 
