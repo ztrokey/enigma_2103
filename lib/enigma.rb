@@ -1,48 +1,45 @@
-class Enigma
-  attr_reader :message,
-              :characters
+require './lib/generatable'
 
-  def initialize(message)
+class Enigma
+  include Generatable
+
+  attr_reader :message,
+              :characters,
+              :key,
+              :date
+
+  def initialize(message, key = generate_key, date = Time.now.strftime("%d%m%y")) #change this to Time.now.strftime("%d%m%y") #'040895'
     @message = message
+    @key = key
+    @date = date
     @characters = (("a".."z").to_a << " ") * 4
   end
 
   def encrypt(message, key, date)
     {
-      encryption: '#{message}',
-      key: '#{generate_key}',
-      date: '#{date}'
+      encryption: @message,
+      key: @key,
+      date: @date
     }
   end
 
   def decrypt(message, key, date)
   end
 
-  def generate_key
-    key = '02715'
-    # key = '%05d' % rand(5 ** 5) this does the random with leading 0's
-    key.chars.map(&:to_i)
-  end
-
-  def offset_generator
-    date = '040895' #change this to Time.now.strftime("%d%m%Y")
-    (date.to_i ** 2).to_s.split(//).last(4)
-  end
-
   def a_shift_assigner
-    generate_key[0..1].join.to_i + offset_generator[0].to_i
+    generate_key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
   end
 
   def b_shift_assigner
-    generate_key[1..2].join.to_i + offset_generator[1].to_i
+    generate_key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
   end
 
   def c_shift_assigner
-    generate_key[2..3].join.to_i + offset_generator[2].to_i
+    generate_key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
   end
 
   def d_shift_assigner
-    generate_key[3..4].join.to_i + offset_generator[3].to_i
+    generate_key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 
   def message_spliter
@@ -55,14 +52,14 @@ class Enigma
     end
   end
 
-  def message_open
-    file = File.open('message.txt', "r")
-    #make a new class runner or message reader
-  end
+  # def message_open
+  #   file = File.open('message.txt', "r")
+  #   #make a new class runner or message reader
+  # end
 
-  def message_read
-    message_open.read
-  end
+  # def message_read
+  #   message_open.read
+  # end
 
   def split_array
     message_index.enum_for(:each_slice, 4).to_a
@@ -125,6 +122,6 @@ class Enigma
   end
 
   def tester
-
+    # require 'pry'; binding.pry
   end
 end
