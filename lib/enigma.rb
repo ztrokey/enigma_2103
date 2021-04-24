@@ -49,32 +49,82 @@ class Enigma
     @message.split(//)
   end
 
-  def tester
-    message_spliter
-    require 'pry'; binding.pry
-  end
-
   def message_index
     message_spliter.map do |letter|
       @characters.index(letter)
     end
   end
+
+  def message_open
+    file = File.open('message.txt', "r")
+    #make a new class runner or message reader
+  end
+
+  def message_read
+    message_open.read
+  end
+
+  def split_array
+    message_index.enum_for(:each_slice, 4).to_a
+  end
+
+  def encrypted_indexes
+    encrypted_indexes = []
+    split_array.each do |array|
+      array.map.with_index do |number, index|
+        if index == 0
+          encrypted_indexes << number += a_shift_assigner
+        elsif index == 1
+          encrypted_indexes << number += b_shift_assigner
+        elsif index == 2
+          encrypted_indexes << number += c_shift_assigner
+        elsif index == 3
+          encrypted_indexes << number += d_shift_assigner
+        end
+      end
+    end
+    encrypted_indexes
+  end
+
+  def encryptor
+    encrypted_letters = []
+    encrypted_indexes.each do |number|
+      encrypted_letters  << @characters[number]
+    end
+    encrypted_letters.join
+  end
+
+  def decrypt_split_array
+    encrypted_indexes.enum_for(:each_slice, 4).to_a
+  end
+
+  def decrypted_indexes
+    decrypted_indexes = []
+    decrypt_split_array.each do |array|
+      array.map.with_index do |number, index|
+        if index == 0
+          decrypted_indexes << number -= a_shift_assigner
+        elsif index == 1
+          decrypted_indexes << number -= b_shift_assigner
+        elsif index == 2
+          decrypted_indexes << number -= c_shift_assigner
+        elsif index == 3
+          decrypted_indexes << number -= d_shift_assigner
+        end
+      end
+    end
+    decrypted_indexes
+  end
+
+  def decryptor
+    decrypted_letters = []
+    decrypted_indexes.each do |number|
+      decrypted_letters  << @characters[number]
+    end
+    decrypted_letters.join
+  end
+
+  def tester
+
+  end
 end
-
-# [6] pry(#<Enigma>)> characters.index('h') + a_shift_assigner
-# => 10
-# [7] pry(#<Enigma>)> characters[10]
-# => "k"
-
-# [10] pry(#<Enigma>)> characters.index(message_spliter[0])
-# => 7
-# [11] pry(#<Enigma>)> characters.index(message_spliter[0]) + a_shift_assigner
-# => 10
-
-# assign char.index(mess_split[index] + shift to variable
-# [2] pry(#<Enigma>)> x = characters.index(message_spliter[0]) + a_shift_assigner
-# => 10
-# then plug variable into characters index
-# [3] pry(#<Enigma>)> characters[x]
-# => "k"
-# then repeat for b, c, and d shifts
