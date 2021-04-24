@@ -8,16 +8,16 @@ class Enigma
               :key,
               :date
 
-  def initialize(message, key = generate_key, date = Time.now.strftime("%d%m%y")) #change this to Time.now.strftime("%d%m%y") #'040895'
+  def initialize(message, key = generate_key, date = date_generator) #change this to Time.now.strftime("%d%m%y") #'040895'
     @message = message
     @key = key
     @date = date
     @characters = (("a".."z").to_a << " ") * 4
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message = @message, key = @key, date = @date)
     {
-      encryption: @message,
+      encryption: encryptor,
       key: @key,
       date: @date
     }
@@ -27,19 +27,19 @@ class Enigma
   end
 
   def a_shift_assigner
-    generate_key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
+    @key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
   end
 
   def b_shift_assigner
-    generate_key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
+    @key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
   end
 
   def c_shift_assigner
-    generate_key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
+    @key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
   end
 
   def d_shift_assigner
-    generate_key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
+    @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 
   def message_spliter
@@ -90,6 +90,10 @@ class Enigma
     end
     encrypted_letters.join
   end
+##########
+  def decrypt_message_spliter
+    encryptor.split(//)
+  end
 
   def decrypt_split_array
     encrypted_indexes.enum_for(:each_slice, 4).to_a
@@ -122,6 +126,6 @@ class Enigma
   end
 
   def tester
-    # require 'pry'; binding.pry
+    require 'pry'; binding.pry
   end
 end
