@@ -91,4 +91,38 @@ RSpec.describe Enigma do
       expect(enigma.tester).to eq('nothing')
     end
   end
+
+  describe '#split_array' do
+    it 'creates sub arrays' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+
+      expect(enigma.split_array).to eq([[7, 4, 11, 11], [14, 26, 22, 14], [17, 11, 3]])
+    end
+  end
+
+  describe '#encrypt_test' do
+    it 'tests encryption' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+
+      expect(enigma.encrypt_test).to eq([10, 31, 84, 31, 17, 53, 95, 34, 20, 38, 76])
+    end
+  end
+
+  describe '#encryptor' do
+    it 'assigns new indexes' do
+      enigma = Enigma.new('hello world')
+      enigma.generate_key
+      enigma.offset_generator
+      enigma.message_spliter
+      enigma.encrypt_test
+
+      expect(enigma.encryptor).to eq("keder ohulw")
+    end
+  end
 end
