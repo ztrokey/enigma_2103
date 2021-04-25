@@ -8,7 +8,7 @@ class Enigma
               :key,
               :date
 
-  def initialize(message, key = generate_key, date = date_generator) #change this to Time.now.strftime("%d%m%y") #'040895'
+  def initialize(message, key = generate_key, date = date_generator)
     @message = message
     @key = key
     @date = date
@@ -16,31 +16,11 @@ class Enigma
   end
 
   def encrypt(message = @message, key = @key, date = @date)
-    message_index
-    split_array
-    encrypted_indexes
-    encryptor
     {encryption: encryptor, key: @key, date: @date}
-    # require 'pry'; binding.pry
   end
 
   def decrypt(message, key, date)
-  end
-
-  def a_shift_assigner
-    @key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
-  end
-
-  def b_shift_assigner
-    @key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
-  end
-
-  def c_shift_assigner
-    @key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
-  end
-
-  def d_shift_assigner
-    @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
+    {decryption: decryptor, key: key, date: date}
   end
 
   def message_spliter
@@ -82,18 +62,10 @@ class Enigma
     end
     encrypted_letters.join
   end
-##########
-  def decrypt_message_spliter
-    encryptor.split(//)
-  end
-
-  def decrypt_split_array
-    encrypted_indexes.enum_for(:each_slice, 4).to_a
-  end
 
   def decrypted_indexes
     decrypted_indexes = []
-    decrypt_split_array.each do |array|
+    split_array.each do |array|
       array.map.with_index do |number, index|
         if index == 0
           decrypted_indexes << number -= a_shift_assigner
@@ -117,7 +89,28 @@ class Enigma
     decrypted_letters.join
   end
 
-  def tester
-    require 'pry'; binding.pry
+  def a_shift_assigner
+    @key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
+  end
+
+  def b_shift_assigner
+    @key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
+  end
+
+  def c_shift_assigner
+    @key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
+  end
+
+  def d_shift_assigner
+    @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 end
+
+
+
+
+
+
+
+
+
