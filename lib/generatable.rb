@@ -7,7 +7,7 @@ module Generatable
   end
 
   def offset_generator
-    Time.now.strftime("%d%m%y") #date = '040895'
+    # Time.now.strftime("%d%m%y") #date = '040895'
     (date_generator.to_i ** 2).to_s.split(//).last(4)
   end
 
