@@ -107,6 +107,14 @@ class Enigma
   end
 end
 
+#remove the symbols and store them in the @sym arr
+#in or after the tor's, put the symbols back at thier index
+#if after the tor's, remove .join and add to new method
+# [1] pry(#<Enigma>)> decrypted_letters
+# => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+# [2] pry(#<Enigma>)> decrypted_letters.join
+# => "hello world"
+
   # def symbol_indexer
   #   removed_symbols = []
   #   message_spliter.each.with_index do |character, index|
