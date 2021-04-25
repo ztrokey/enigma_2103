@@ -140,7 +140,7 @@ RSpec.describe Enigma do
   end
 
   describe '#encrypt' do
-    xit 'shows the message, key and date' do
+    it 'shows the message, key and date' do
       enigma = Enigma.new('hello world')
       # enigma.generate_key
       # enigma.offset_generator

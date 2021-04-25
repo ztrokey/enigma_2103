@@ -16,11 +16,12 @@ class Enigma
   end
 
   def encrypt(message = @message, key = @key, date = @date)
-    {
-      encryption: encryptor,
-      key: @key,
-      date: @date
-    }
+    message_index
+    split_array
+    encrypted_indexes
+    encryptor
+    {encryption: encryptor, key: @key, date: @date}
+    # require 'pry'; binding.pry
   end
 
   def decrypt(message, key, date)
@@ -51,15 +52,6 @@ class Enigma
       @characters.index(letter)
     end
   end
-
-  # def message_open
-  #   file = File.open('message.txt', "r")
-  #   #make a new class runner or message reader
-  # end
-
-  # def message_read
-  #   message_open.read
-  # end
 
   def split_array
     message_index.enum_for(:each_slice, 4).to_a
