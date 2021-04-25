@@ -13,10 +13,11 @@ class Enigma
     @key = key
     @date = date
     @characters = (("a".."z").to_a << " ") * 4
+    @symbols = []
   end
 
   def encrypt(message = @message, key = @key, date = @date)
-    {encryption: encryptor, key: @key, date: @date}
+    {encryption: encryptor, key: key, date: date}
   end
 
   def decrypt(message, key, date)
@@ -105,6 +106,31 @@ class Enigma
     @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 end
+
+  # def symbol_indexer
+  #   removed_symbols = []
+  #   message_spliter.each.with_index do |character, index|
+  #     removed_symbols << [character, index] if @characters.include?(character) == false
+  #   end
+  #   removed_symbols.flatten
+  # end
+
+  # def symbol_remover
+  #   message_spliter
+  #   message_spliter.delete_at(symbol_indexer[1])
+  #   message_spliter
+  # end
+
+  # def message_spliter
+  #   @message.split(//)#.delete_if.with_index do |character, index|
+    #   @symbols << [character, index] if @characters.include?(character) == false
+    # end
+    # require 'pry'; binding.pry
+  # end
+# end
+
+# [3] pry(#<Enigma>)> @message.split(//).delete_if { |character| @characters.include?(character) == false }
+# => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
 
 
 
