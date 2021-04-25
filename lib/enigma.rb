@@ -16,7 +16,7 @@ class Enigma
   end
 
   def encrypt(message = @message, key = @key, date = @date)
-    {encryption: encryptor, key: @key, date: @date}
+    {encryption: encryptor, key: key, date: date}
   end
 
   def decrypt(message, key, date)
@@ -103,6 +103,15 @@ class Enigma
 
   def d_shift_assigner
     @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
+  end
+
+  def symbol_remover
+    removed_symbols = []
+    message_spliter.each.with_index do |character, index|
+      removed_symbols << [character, index] if @characters.include?(character) == false
+    end
+    removed_symbols
+    require 'pry'; binding.pry
   end
 end
 
