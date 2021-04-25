@@ -153,4 +153,12 @@ RSpec.describe Enigma do
       expect(enigma.symbol_indexer).to eq(["!", 11])
     end
   end
+
+  describe '#message_spliter' do
+    it 'splits and removes symbols from message' do
+      enigma = Enigma.new('hello world!', '02715', '040895')
+
+      expect(enigma.message_spliter).to eq(["!", 11])
+    end
+  end
 end

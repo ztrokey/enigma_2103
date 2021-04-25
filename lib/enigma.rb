@@ -23,9 +23,9 @@ class Enigma
     {decryption: decryptor, key: key, date: date}
   end
 
-  def message_spliter
-    @message.split(//)
-  end
+  # def message_spliter
+  #   @message.split(//)
+  # end
 
   def message_index
     message_spliter.map do |letter|
@@ -105,14 +105,28 @@ class Enigma
     @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 
-  def symbol_indexer
-    removed_symbols = []
-    message_spliter.each.with_index do |character, index|
-      removed_symbols << [character, index] if @characters.include?(character) == false
-    end
-    removed_symbols.flatten
+  # def symbol_indexer
+  #   removed_symbols = []
+  #   message_spliter.each.with_index do |character, index|
+  #     removed_symbols << [character, index] if @characters.include?(character) == false
+  #   end
+  #   removed_symbols.flatten
+  # end
+
+  # def symbol_remover
+  #   message_spliter
+  #   message_spliter.delete_at(symbol_indexer[1])
+  #   message_spliter
+  # end
+
+  def message_spliter
+    @message.split(//).delete_if { |character| @characters.include?(character) == false }
+    # require 'pry'; binding.pry
   end
 end
+
+# [3] pry(#<Enigma>)> @message.split(//).delete_if { |character| @characters.include?(character) == false }
+# => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
 
 
 
