@@ -105,13 +105,12 @@ class Enigma
     @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 
-  def symbol_remover
+  def symbol_indexer
     removed_symbols = []
     message_spliter.each.with_index do |character, index|
       removed_symbols << [character, index] if @characters.include?(character) == false
     end
-    removed_symbols
-    require 'pry'; binding.pry  
+    removed_symbols.flatten
   end
 end
 

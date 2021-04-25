@@ -146,11 +146,11 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#symbol_remover' do
+  describe '#symbol_indexer' do
     it 'returns symbols and index position' do
       enigma = Enigma.new('hello world!', '02715', '040895')
 
-      expect(enigma.symbol_remover).to eq(["!", 11])
+      expect(enigma.symbol_indexer).to eq(["!", 11])
     end
   end
 end
