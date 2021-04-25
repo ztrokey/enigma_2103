@@ -13,6 +13,7 @@ class Enigma
     @key = key
     @date = date
     @characters = (("a".."z").to_a << " ") * 4
+    @symbols = []
   end
 
   def encrypt(message = @message, key = @key, date = @date)
@@ -120,7 +121,9 @@ class Enigma
   # end
 
   def message_spliter
-    @message.split(//).delete_if { |character| @characters.include?(character) == false }
+    @message.split(//)#.delete_if.with_index do |character, index|
+    #   @symbols << [character, index] if @characters.include?(character) == false
+    # end
     # require 'pry'; binding.pry
   end
 end

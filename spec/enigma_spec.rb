@@ -158,7 +158,8 @@ RSpec.describe Enigma do
     it 'splits and removes symbols from message' do
       enigma = Enigma.new('hello world!', '02715', '040895')
 
-      expect(enigma.message_spliter).to eq(["!", 11])
+      expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+      expect(enigma.message_spliter).to eq(expected)
     end
   end
 end
