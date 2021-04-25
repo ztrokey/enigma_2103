@@ -1,0 +1,91 @@
+########
+require './lib/generatable'
+
+class Enigma
+  include Generatable
+
+  attr_reader :message,
+              :characters,
+              :key,
+              :date
+
+  def initialize(message, key = generate_key, date = date_generator)
+    @message = message
+    @key = key
+    @date = date
+    @characters = (("a".."z").to_a << " ") * 4
+  end
+
+  def encrypt(message = @message, key = @key, date = @date)
+    
+  end
+
+  def message_spliter
+    @message.split(//)
+  end
+
+  def message_index
+    message_spliter.map do |letter|
+      @characters.index(letter)
+    end
+  end
+
+  def split_array
+    message_index.enum_for(:each_slice, 4).to_a
+  end
+
+  def encrypted_indexes
+    encrypted_indexes = []
+    split_array.each do |array|
+      array.map.with_index do |number, index|
+        if index == 0
+          encrypted_indexes << number += a_shift_assigner
+        elsif index == 1
+          encrypted_indexes << number += b_shift_assigner
+        elsif index == 2
+          encrypted_indexes << number += c_shift_assigner
+        elsif index == 3
+          encrypted_indexes << number += d_shift_assigner
+        end
+      end
+    end
+    encrypted_indexes
+  end
+
+  def encryptor
+    encrypted_letters = []
+    encrypted_indexes.each do |number|
+      encrypted_letters  << @characters[number]
+    end
+    encrypted_letters.join
+  end
+
+  def decrypted_indexes
+    decrypted_indexes = []
+    decrypt_split_array.each do |array|
+      array.map.with_index do |number, index|
+        if index == 0
+          decrypted_indexes << number -= a_shift_assigner
+        elsif index == 1
+          decrypted_indexes << number -= b_shift_assigner
+        elsif index == 2
+          decrypted_indexes << number -= c_shift_assigner
+        elsif index == 3
+          decrypted_indexes << number -= d_shift_assigner
+        end
+      end
+    end
+    decrypted_indexes
+  end
+
+  def decryptor
+    decrypted_letters = []
+    decrypted_indexes.each do |number|
+      decrypted_letters  << @characters[number]
+    end
+    decrypted_letters.join
+  end
+
+
+end
+#######
