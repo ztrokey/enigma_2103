@@ -139,16 +139,11 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#encrypt' do
-    xit 'shows the message, key and date' do
+  describe '#decrypt' do
+    it 'decrypt test' do
       enigma = Enigma.new('hello world')
-      # enigma.generate_key
-      # enigma.offset_generator
-      # enigma.message_spliter
-      # enigma.encrypted_indexes
 
-
-      expect(enigma.encrypt(@message, @key, @date)).to eq('hello world')
+      expect(enigma.decrypt(enigma.encryptor, '02715', '040895')).to eq('hello world')
     end
   end
 
