@@ -1,8 +1,8 @@
 module Generatable
 
   def generate_key
-    # key = '02715'
-    '%05d' % rand(5 ** 5) #this does the random with leading 0's
+    key = '02715'
+    # '%05d' % rand(5 ** 5) #this does the random with leading 0's
     # key.chars.map(&:to_i) #moved to split assigners
   end
 
@@ -12,7 +12,8 @@ module Generatable
   end
 
   def date_generator
-    Time.now.strftime("%d%m%y")
+    '040895'
+    # Time.now.strftime("%d%m%y")
   end
 end
 
