@@ -107,7 +107,7 @@ class Enigma
   end
 end
 
-#remove the symbols and store them in the @sym arr
+#before message_splitter,remove the symbols and store them in the @sym arr
 #in or after the tor's, put the symbols back at thier index
 #if after the tor's, remove .join and add to new method
 # [1] pry(#<Enigma>)> decrypted_letters
