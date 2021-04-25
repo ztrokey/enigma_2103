@@ -111,7 +111,7 @@ class Enigma
       removed_symbols << [character, index] if @characters.include?(character) == false
     end
     removed_symbols
-    require 'pry'; binding.pry
+    require 'pry'; binding.pry  
   end
 end
 
