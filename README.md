@@ -18,7 +18,7 @@
 ## TDD
 
 - **3**
-- Every method has a test. Commit history is good. I used branches and pull requests to ensure that my working code was protected. 104 / 104 LOC (100%) covered.
+- Every method has a test. Commit history is good. I used branches and pull requests to ensure that my working code was protected. 105 / 105 LOC (100%) covered.
 
 ## Overall
 - **2.75**
