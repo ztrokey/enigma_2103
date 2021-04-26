@@ -20,16 +20,16 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#shift_assigners' do
-    it 'assigns the shifts' do
-      enigma = Enigma.new('hello world', '02715', '040895')
+  # describe '#shift_assigners' do
+  #   it 'assigns the shifts' do
+  #     enigma = Enigma.new('hello world', '02715', '040895')
 
-      expect(enigma.a_shift_assigner).to eq(3)
-      expect(enigma.b_shift_assigner).to eq(27)
-      expect(enigma.c_shift_assigner).to eq(73)
-      expect(enigma.d_shift_assigner).to eq(20)
-    end
-  end
+  #     expect(enigma.a_shift_assigner).to eq(3)
+  #     expect(enigma.b_shift_assigner).to eq(27)
+  #     expect(enigma.c_shift_assigner).to eq(73)
+  #     expect(enigma.d_shift_assigner).to eq(20)
+  #   end
+  # end
 
   describe '#message_spliter' do
     it 'splits a string into an array' do
