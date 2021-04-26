@@ -1,3 +1,4 @@
+require 'date'
 require './lib/generatable'
 
 class Enigma
