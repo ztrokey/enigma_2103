@@ -28,8 +28,14 @@ class Enigma
     @message.split(//)
   end
 
+  def symbol_remover
+    message_spliter.delete_if.with_index do |character, index|
+      @symbols << [character, index] if !@characters.include?(character)
+    end
+  end
+
   def message_index
-    message_spliter.map do |letter|
+    symbol_remover.map do |letter|
       @characters.index(letter)
     end
   end
@@ -61,6 +67,9 @@ class Enigma
     encrypted_indexes.each do |number|
       encrypted_letters  << @characters[number]
     end
+    @symbols.each do |symbol|
+      encrypted_letters.insert(symbol[1], symbol[0])
+    end
     encrypted_letters.join
   end
 
@@ -87,6 +96,9 @@ class Enigma
     decrypted_indexes.each do |number|
       decrypted_letters  << @characters[number]
     end
+    @symbols.each do |symbol|
+      decrypted_letters.insert(symbol[1], symbol[0])
+    end
     decrypted_letters.join
   end
 
@@ -106,45 +118,3 @@ class Enigma
     @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
   end
 end
-
-#before message_splitter,remove the symbols and store them in the @sym arr
-#in or after the tor's, put the symbols back at thier index
-#if after the tor's, remove .join and add to new method
-# [1] pry(#<Enigma>)> decrypted_letters
-# => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
-# [2] pry(#<Enigma>)> decrypted_letters.join
-# => "hello world"
-
-  # def symbol_indexer
-  #   removed_symbols = []
-  #   message_spliter.each.with_index do |character, index|
-  #     removed_symbols << [character, index] if @characters.include?(character) == false
-  #   end
-  #   removed_symbols.flatten
-  # end
-
-  # def symbol_remover
-  #   message_spliter
-  #   message_spliter.delete_at(symbol_indexer[1])
-  #   message_spliter
-  # end
-
-  # def message_spliter
-  #   @message.split(//)#.delete_if.with_index do |character, index|
-    #   @symbols << [character, index] if @characters.include?(character) == false
-    # end
-    # require 'pry'; binding.pry
-  # end
-# end
-
-# [3] pry(#<Enigma>)> @message.split(//).delete_if { |character| @characters.include?(character) == false }
-# => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
-
-
-
-
-
-
-
-
-
