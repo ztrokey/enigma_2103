@@ -41,7 +41,7 @@ class Enigma
   end
 
   def split_array
-    message_index.enum_for(:each_slice, 4).to_a
+    message_index.each_slice(4).to_a
   end
 
   def encrypted_indexes
@@ -101,20 +101,4 @@ class Enigma
     end
     decrypted_letters.join
   end
-
-  # def a_shift_assigner
-  #   @key.chars.map(&:to_i)[0..1].join.to_i + offset_generator[0].to_i
-  # end
-
-  # def b_shift_assigner
-  #   @key.chars.map(&:to_i)[1..2].join.to_i + offset_generator[1].to_i
-  # end
-
-  # def c_shift_assigner
-  #   @key.chars.map(&:to_i)[2..3].join.to_i + offset_generator[2].to_i
-  # end
-
-  # def d_shift_assigner
-  #   @key.chars.map(&:to_i)[3..4].join.to_i + offset_generator[3].to_i
-  # end
 end
