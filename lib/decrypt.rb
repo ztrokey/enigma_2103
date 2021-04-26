@@ -11,5 +11,4 @@ decrypted = enigma.decrypt(message, key, date)[:decryption]
 writer = File.open(ARGV[1], 'w')
 writer.write(decrypted)
 writer.close
-# require 'pry'; binding.pry
 puts "Created #{(ARGV[1])} with the key #{key} and date #{date}"
