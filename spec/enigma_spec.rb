@@ -123,23 +123,29 @@ RSpec.describe Enigma do
       expect(enigma.decrypt('keder ohulw', '02715', '040895')).to eq(expected)
     end
   end
+
+  describe '#symbol_remover' do
+    it 'removes symbols' do
+      enigma = Enigma.new('hello world!', '02715', '040895')
+
+      expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+      expect(enigma.symbol_remover).to eq(expected)
+    end
+  end
+
+  describe '#encryptor' do
+    it 'adds symbols back in' do
+      enigma = Enigma.new('hello world!', '02715', '040895')
+
+      expect(enigma.encryptor).to eq("keder ohulw!")
+    end
+  end
+
+  describe '#decryptor' do
+    it 'adds symbols back in' do
+      enigma = Enigma.new('keder ohulw!', '02715', '040895')
+
+      expect(enigma.decryptor).to eq("hello world!")
+    end
+  end
 end
-
-# describe '#tester' do
-#   xit 'this is just for me to test stuff' do
-#     enigma = Enigma.new('hello world')
-#     enigma.generate_key
-#     enigma.offset_generator
-#     enigma.message_spliter
-
-#     expect(enigma.tester).to eq('nothing')
-#   end
-# end
-
-# describe '#symbol_indexer' do
-#   xit 'returns symbols and index position' do
-#     enigma = Enigma.new('hello world!', '02715', '040895')
-
-#     expect(enigma.symbol_indexer).to eq(["!", 11])
-#   end
-# end
